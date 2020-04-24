@@ -31,18 +31,18 @@ class MoeUuid
       * @input number - lenght of expected MoeUuid
       * @return string
     **/
-     public static function getUniqueAlphanumeric($length = 8)
+     public static function getUniqueAlphanumeric($length = 10)
      {
         $token = "";
-        $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $codeAlphabet.= "0123456789";
+        $codeAlphabet = "BCDFGHJKMPQRTVWXY";
+        $codeAlphabet.= "2346789";
         $max = strlen($codeAlphabet); // edited
 
         for ($i=0; $i < $length; $i++) {
             $token .= $codeAlphabet[MoeUuid::crypto_rand_secure(0, $max-1)];
         }
-
-            return $token;
+            $alphanum = str_split($token,5);
+            return $alphanum[0].'-'.$alphanum[1];
      }
 
      public static function isValidMoeUuid($moeuuid,$lenght = 8){

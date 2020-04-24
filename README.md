@@ -1,12 +1,12 @@
-# Very short description of the package
+# This package is developed for generate human readable Digital ID
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mohamednizar/moe-uuid.svg?style=flat-square)](https://packagist.org/packages/mohamednizar/moe-uuid)
 [![Build Status](https://img.shields.io/travis/mohamednizar/moe-uuid/master.svg?style=flat-square)](https://travis-ci.org/mohamednizar/moe-uuid)
 [![Quality Score](https://img.shields.io/scrutinizer/g/mohamednizar/moe-uuid.svg?style=flat-square)](https://scrutinizer-ci.com/g/mohamednizar/moe-uuid)
 [![Total Downloads](https://img.shields.io/packagist/dt/mohamednizar/moe-uuid.svg?style=flat-square)](https://packagist.org/packages/mohamednizar/moe-uuid)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
-
+This packe will generate a unique user in a range of 8 digits. You can increase the size of the digits.Possible random ID are 2.821109907×10¹².
+Even thougt I adivce you to test you self before implement this packge.We have tested over continues  `1 Million ID`.
 ## Installation
 
 You can install the package via composer:

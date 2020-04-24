@@ -31,7 +31,7 @@ class MoeUuid
       * @input number - lenght of expected MoeUuid
       * @return string
     **/
-     public function getUniqueAlphanumeric(number $length = 8)
+     public  function getUniqueAlphanumeric($length = 8)
      {
         $token = "";
         $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

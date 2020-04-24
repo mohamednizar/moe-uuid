@@ -2,8 +2,10 @@
 
 namespace Mohamednizar\MoeUuid\Tests;
 
+
+// require __DIR__ .'/../src/MoeUuid.php';
 use PHPUnit\Framework\TestCase;
-require '../src/MoeUuid';
+use Mohamednizar\MoeUuid\MoeUuid;
 
 class ExampleTest extends TestCase
 {
@@ -13,15 +15,22 @@ class ExampleTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testOneMillion(){
+    public function testOne(){
         $users = 'users.txt';
         $moeId = new MoeUuid();
-        $id = $moeId->getUniqAlphanumeric();
+        $id = $moeId->getUniqueAlphanumeric();
         $text = $id . "," . $id . "\n";
         $users = fopen($users, 'a+');
-        if(fwrite($fp, $text))  {
+        if(fwrite($users, $text))  {
                 echo 'saved';
+        }
+    }
 
+    public function testThousand(){
+        $number = 1000;
+        while ($number >= 0){
+            $number--;
+            $this->testOne();
         }
     }
 }

@@ -44,4 +44,8 @@ class MoeUuid
 
             return $token;
      }
+
+     public static function isValidMoeUuid($moeuuid,$lenght = 8){
+        return preg_match('/^[a-zA-Z0-9]{'.$lenght.'}$/', $moeuuid);
+     }
 }

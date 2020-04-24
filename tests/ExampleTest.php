@@ -1,4 +1,5 @@
 <?php
+require '../src/MoeUuid';
 
 namespace Mohamednizar\MoeUuid\Tests;
 

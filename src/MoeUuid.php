@@ -10,7 +10,7 @@ class MoeUuid
      * @input $min , $max
      * @return number
     **/
-     public function crypto_rand_secure($min, $max)
+     public static function crypto_rand_secure($min, $max)
      {
         $range = $max - $min;
         if ($range < 1) return $min; // not so random...
@@ -31,7 +31,7 @@ class MoeUuid
       * @input number - lenght of expected MoeUuid
       * @return string
     **/
-     public  function getUniqueAlphanumeric($length = 8)
+     public static function getUniqueAlphanumeric($length = 8)
      {
         $token = "";
         $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -39,7 +39,7 @@ class MoeUuid
         $max = strlen($codeAlphabet); // edited
 
         for ($i=0; $i < $length; $i++) {
-            $token .= $codeAlphabet[$this->crypto_rand_secure(0, $max-1)];
+            $token .= $codeAlphabet[MoeUuid::crypto_rand_secure(0, $max-1)];
         }
 
             return $token;

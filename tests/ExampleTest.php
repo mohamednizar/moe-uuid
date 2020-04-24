@@ -1,10 +1,9 @@
 <?php
-require '../src/MoeUuid';
 
 namespace Mohamednizar\MoeUuid\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Mohamednizar\MoeUuid;
+require '../src/MoeUuid';
 
 class ExampleTest extends TestCase
 {
@@ -17,11 +16,12 @@ class ExampleTest extends TestCase
     public function testOneMillion(){
         $users = 'users.txt';
         $moeId = new MoeUuid();
-        $id = $moeId->getUniqueAlphanumeric();
+        $id = $moeId->getUniqAlphanumeric();
         $text = $id . "," . $id . "\n";
         $users = fopen($users, 'a+');
         if(fwrite($fp, $text))  {
                 echo 'saved';
+
         }
     }
 }

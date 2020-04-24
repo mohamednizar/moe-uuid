@@ -4,6 +4,7 @@ require '../src/MoeUuid';
 namespace Mohamednizar\MoeUuid\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Mohamednizar\MoeUuid;
 
 class ExampleTest extends TestCase
 {

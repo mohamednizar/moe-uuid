@@ -1,0 +1,42 @@
+{
+    "name": "mohamednizar/moe-uuid",
+    "description": "Unique  User id generator",
+    "keywords": [
+        "mohamednizar",
+        "moe-uuid"
+    ],
+    "homepage": "https://github.com/mohamednizar/moe-uuid",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Mohamed Nizar",
+            "email": "nizarucsc@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mohamednizar\\MoeUuid\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mohamednizar\\MoeUuid\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

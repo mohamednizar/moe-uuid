@@ -53,7 +53,8 @@ class MoeUuid
                 $length = 8;
                 break;
             case 4:
-                $length = 10;
+                $length = 9;
+                $split = 3;
                 break;
             case 5:
                 $length = 12;

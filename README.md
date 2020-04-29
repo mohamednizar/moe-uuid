@@ -42,13 +42,13 @@ QVPV-KKPW
 GRHT-8RKQ
 ``` 
 
- * Type 4: 25^10 IDs
+ * Type 4: 25^9 IDs
 
 ```
 MoeUuid::getUniqueAlphanumeric(4); Output : 
 
-KY7V-99X3-7T
-VJ2Q-DHMY-M7
+W7R-32J-MYX
+MRM-H2B-PPV
 ```
  * Type 5: 25^12 IDs
  

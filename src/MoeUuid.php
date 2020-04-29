@@ -78,7 +78,7 @@ class MoeUuid
 
      }
 
-     public function format($token,$split){
+     public  static function format($token,$split){
         $partitions =  str_split($token,$split);
         $newToken = '';
         for($i=0; $i < count($partitions); $i++){

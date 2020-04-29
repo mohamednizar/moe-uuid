@@ -31,21 +31,62 @@ class MoeUuid
       * @input number - lenght of expected MoeUuid
       * @return string
     **/
-     public static function getUniqueAlphanumeric($length = 10)
+     public static function getUniqueAlphanumeric($version)
      {
         $token = "";
         $codeAlphabet = "BCDFGHJKMPQRTVWXY";
         $codeAlphabet.= "2346789";
         $max = strlen($codeAlphabet); // edited
 
-        for ($i=0; $i < $length; $i++) {
-            $token .= $codeAlphabet[MoeUuid::crypto_rand_secure(0, $max-1)];
+        $length = 10;
+        $split = 4;
+
+        switch($version){
+            case 1:
+                $length = 4;
+                break;
+            case 2:
+                $length = 6;
+                $split = 3;
+                break;
+            case 3:
+                $length = 8;
+                break;
+            case 4:
+                $length = 10;
+                break;
+            case 5:
+                $length = 12;
+                break;
+            case 6:
+                $length = 14;
+                break;
+            case 7:
+                $length = 16;
+                break;
+            default:
+                $length = 10;
+                break;
         }
-            $alphanum = str_split($token,5);
-            return $alphanum[0].'-'.$alphanum[1];
+
+        for ($i=0; $i < $length; $i++) {
+            $token .= $codeAlphabet[self::crypto_rand_secure(0, $max-1)];
+        }
+        $token  = self::format($token,$split);
+        return $token;
+
+     }
+
+     public function format($token,$split){
+        $partitions =  str_split($token,$split);
+        $newToken = '';
+        for($i=0; $i < count($partitions); $i++){
+            $newToken .='-'.$partitions[$i];
+        }
+        return substr($newToken,1,strlen($newToken));
      }
 
      public static function isValidMoeUuid($moeuuid,$lenght = 8){
-        return preg_match('/^[a-zA-Z0-9]{'.$lenght.'}$/', $moeuuid);
+        return preg_match('/^[A-Z2-9]{'.$lenght.'}$/', $moeuuid);
      }
 }

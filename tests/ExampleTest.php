@@ -18,35 +18,24 @@ class ExampleTest extends TestCase
     public function testOne(){
         $users = 'users.txt';
         $moeId = new MoeUuid();
-        $id = MoeUuid::getUniqueAlphanumeric();
-        $text = $id . "," . $id . "\n";
+        $id = MoeUuid::getUniqueAlphanumeric(7);
+        $file = file_get_contents($users);
+        $text =  $id . "\n";
         $users = fopen($users, 'a+');
-        if(fwrite($users, $text))  {
-                echo $id . 'Created';
+        $this->assertEquals(true,(strpos($file,$id) == false));
+        if(strpos($file,$id)){
+                echo 'duplicated';
+        }else{
+            fwrite($users, $text);
+//                 echo $id . ' '. "\n";
         }
     }
 
-    public function testThousand(){
-        $number = 1000;
+    public function testTest(){
+        $number = 10;
         while ($number >= 0){
             $number--;
-            $this->testOne();
+                $this->testOne();
         }
-    }
-
-    public function testValidMoeuuid(){
-        $id1 = '4545';
-        $id2 = '08P3PUUT';
-        $id3 = '08P3PUUAT';
-        $id4 = '1543144646466';
-        $valid1 = MoeUuid::isValidMoeUuid($id1);
-        $valid2 = MoeUuid::isValidMoeUuid($id2);
-        $valid3 = MoeUuid::isValidMoeUuid($id3);
-        $valid4 = MoeUuid::isValidMoeUuid($id4);
-        $this->assertEquals(false,$valid1);
-        $this->assertEquals(true,$valid2);
-        $this->assertEquals(false,$valid3);
-        $this->assertEquals(false,$valid4);
-
     }
 }

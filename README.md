@@ -5,7 +5,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/mohamednizar/moe-uuid.svg?style=flat-square)](https://scrutinizer-ci.com/g/mohamednizar/moe-uuid)
 [![Total Downloads](https://img.shields.io/packagist/dt/mohamednizar/moe-uuid.svg?style=flat-square)](https://packagist.org/packages/mohamednizar/moe-uuid)
 
-This packe will generate a unique user in a range of 8 digits. You can increase the size of the digits.Possible random ID are 2.821109907×10¹².
+This packe will generate a unique user in 7 types  of digits. You can increase the size of the digits.
 Even thougt I adivce you to test you self before implement this packge.We have tested over continues  `1 Million ID`.
 ## Installation
 
@@ -15,12 +15,67 @@ You can install the package via composer:
 composer require mohamednizar/moe-uuid
 ```
 
-## Usage
+### Usage
+ * Type 1: 25^4 IDs
+ 
+``` 
+MoeUuid::getUniqueAlphanumeric(1); Output : 
 
-``` php
-// Usage description here
+D8DR
+F7D2
+```
+ * Type 2: 25^6 IDs
+ 
+```
+MoeUuid::getUniqueAlphanumeric(2); Output : 
+
+QTK-GQM
+QRR-CYY
+``` 
+
+ * Type 3: 25^8 IDs
+ 
+```
+MoeUuid::getUniqueAlphanumeric(3); Output : 
+
+QVPV-KKPW
+GRHT-8RKQ
+``` 
+
+ * Type 4: 25^10 IDs
+
+```
+MoeUuid::getUniqueAlphanumeric(4); Output : 
+
+KY7V-99X3-7T
+VJ2Q-DHMY-M7
+```
+ * Type 5: 25^12 IDs
+ 
+```
+MoeUuid::getUniqueAlphanumeric(5); Output : 
+
+X4H2-H4Y2-XVTX
+TTRB-KDXM-YVHQ
 ```
 
+ * Type 6: 25^14 IDs
+ 
+```
+MoeUuid::getUniqueAlphanumeric(6); Output : 
+
+3WD6-KDYT-DX72-JK
+D6P3-MG44-C9MY-7T
+```
+
+ * Type 7: 25^16 IDs
+ 
+```
+MoeUuid::getUniqueAlphanumeric(7); Output : 
+
+TMPG-GFYB-KYCT-B6B2
+VG4H-DWP7-BQHF-C2BJ
+```
 ### Testing
 
 ``` bash

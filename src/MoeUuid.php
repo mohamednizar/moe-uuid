@@ -39,36 +39,8 @@ class MoeUuid
         $max = strlen($codeAlphabet); // edited
 
         $length = 10;
-        $split = 4;
+        $split = self::getStingLength($version);
 
-        switch($version){
-            case 1:
-                $length = 4;
-                break;
-            case 2:
-                $length = 6;
-                $split = 3;
-                break;
-            case 3:
-                $length = 8;
-                break;
-            case 4:
-                $length = 9;
-                $split = 3;
-                break;
-            case 5:
-                $length = 12;
-                break;
-            case 6:
-                $length = 14;
-                break;
-            case 7:
-                $length = 16;
-                break;
-            default:
-                $length = 10;
-                break;
-        }
 
         for ($i=0; $i < $length; $i++) {
             $token .= $codeAlphabet[self::crypto_rand_secure(0, $max-1)];
@@ -76,6 +48,20 @@ class MoeUuid
         $token  = self::format($token,$split);
         return $token;
 
+     }
+
+     public static function getStingLength($type){
+        switch($type){
+            case 2:
+                return 3;
+                break;
+            case 4:
+                return 3;
+                break;
+            default:
+                return 4;
+                break;
+         }
      }
 
      public  static function format($token,$split){
@@ -87,7 +73,9 @@ class MoeUuid
         return substr($newToken,1,strlen($newToken));
      }
 
-     public static function isValidMoeUuid($moeuuid,$lenght = 8){
-        return preg_match('/^[A-Z2-9]{'.$lenght.'}$/', $moeuuid);
+     public static function isValidMoeUuid($moeuuid,$type = 4){
+        $split = self::getStingLength($type);
+        return preg_match("/^[BCDFGHJKMPQRTVWXY2-9]{".$split."}-[BCDFGHJKMPQRTVWXY2-9]{".$split."}-[BCDFGHJKMPQRTVWXY2-9]{".$split."}/", $moeuuid);
      }
+
 }

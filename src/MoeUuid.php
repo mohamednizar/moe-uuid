@@ -46,7 +46,8 @@ class MoeUuid
             $token .= $codeAlphabet[self::crypto_rand_secure(0, $max-1)];
         }
 
-        $checkDigit = self::luhnCheck($token);
+        $checkDigit = self::ValidateCheckCharacter($token);
+        echo 'checkDigit: ' .$checkDigit;
         $token .= $checkDigit;
         $token  = self::format($token,$split);
         return $token;
@@ -107,55 +108,53 @@ class MoeUuid
 
      public static function isValidMoeUuid($moeuuid,$type = 4){
         $split = self::getStingLength($type);
-
         return preg_match("/^[2346789BCDFGHJKMPQRTVWXY]{".$split."}-[2346789BCDFGHJKMPQRTVWXY]{".$split."}-[0-9BCDFGHJKMPQRTVWXY]{".$split."}/", $moeuuid);
      }
 
-     public static function luhnCheck($checkNumber){
-        $characters = [
-            'B'=> 11,
-            'C'=> 12,
-            'D'=> 13,
-            'F'=> 15,
-            'G'=> 16,
-            'H'=> 17,
-            'J'=> 18,
-            'K'=> 20,
-            'M'=> 21,
-            'P'=> 22,
-            'Q'=> 24,
-            'R'=> 25,
-            'T'=> 27,
-            'V'=> 29,
-            'W'=> 30,
-            'X'=> 31,
-            'Y'=> 33
-        ];
+     public static function CodePointFromCharacter($character){
+        $characters = array_flip(str_split("2346789BCDFGHJKMPQRTVWXY"));
+        return $characters[$character];
+     }
 
+     public static function CharacterFromCodePoint($codePoint){
+        $characters = str_split("2346789BCDFGHJKMPQRTVWXY");
+        return $characters[$codePoint];
+     }
+
+     public static function NumberOfValidCharacters(){
+        return strlen('2346789BCDFGHJKMPQRTVWXY');
+     }
+
+    /**
+     * Luhn mod N algorithm
+     * @input string
+     * @return string
+    **/
+     public static function ValidateCheckCharacter($checkNumber){
       	$length = strlen($checkNumber) - 1;
+      	$factor = 2;
       	$total_sum = 0;
       	$cur_num = 0;
+      	$n = self::NumberOfValidCharacters();
 
-      	for ($num=($length-1);$num >= 0;--$num) {
-      		if (!ctype_digit((string) $checkNumber[$num])) {
-      			$sum = $characters[$checkNumber[$num]];
-      			}
-      		else {
-      			$sum = $checkNumber[$num];
-      			}
+        // Starting from the right and working leftwards is easier since
+        // the initial "factor" will always be "2".
+      	for ($num=($length);$num >= 0;--$num) {
+      		    $codePoint = self::codePointFromCharacter($checkNumber[$num]);
+      		    $added = $factor * $codePoint;
 
-      		if ($cur_num++ % 2 == 0) {
-      			$sum *= 2;
-      			}
+      		    // Alternate the "factor" that each "codePoint" is multiplied by
+      		    $factor = ($factor == 2) ? 1 : 2;
 
-      		if ($sum > 9) {
-      			$sum = substr($sum, 0, 1) + substr($sum, 1, 1);
-      			}
+      		    // Sum the digits of the "addend" as expressed in base "n"
+      		    $added = ($added/$n) + ($added % $n);
+      		    $total_sum += $added;
+      	}
 
-      		$total_sum += $sum;
-      		}
-
-      	return (9 - ($total_sum % 9));//Use this to return the missing validation number, note has to be passed with x in the end
-      	//return (($total_sum + $checkNumber[$length]) % 10 == 0); //Use this to validate the 12 digit number
+        // Calculate the number that must be added to the "sum"
+        // to make it divisible by "n".
+      	$reminder = $total_sum % $n;
+      	$checkCodePoint  = ($n - $reminder) % $n;
+        return  self::CharacterFromCodePoint($checkCodePoint);
     }
 }

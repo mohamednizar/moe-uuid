@@ -18,7 +18,7 @@ class ExampleTest extends TestCase
     public function testOne(){
         $users = 'users.txt';
         $moeId = new MoeUuid();
-        $id = MoeUuid::getUniqueAlphanumeric(4);
+        $id = MoeUuid::getUniqueAlphanumeric(3);
         $file = file_get_contents($users);
         $text =  $id . "\n";
         $users = fopen($users, 'a+');

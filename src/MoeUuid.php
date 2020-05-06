@@ -108,7 +108,7 @@ class MoeUuid
      public static function isValidMoeUuid($moeuuid,$type = 4){
         $split = self::getStingLength($type);
 
-        return preg_match("/^[2346789BCDFGHJKMPQRTVWXY]{".$split."}-[2346789BCDFGHJKMPQRTVWXY]{".$split."}-[B2346789BCDFGHJKMPQRTVWXY]{".$split."}/", $moeuuid);
+        return preg_match("/^[2346789BCDFGHJKMPQRTVWXY]{".$split."}-[2346789BCDFGHJKMPQRTVWXY]{".$split."}-[0-9BCDFGHJKMPQRTVWXY]{".$split."}/", $moeuuid);
      }
 
      public static function luhnCheck($checkNumber){
@@ -131,6 +131,7 @@ class MoeUuid
             'X'=> 31,
             'Y'=> 33
         ];
+
       	$length = strlen($checkNumber) - 1;
       	$total_sum = 0;
       	$cur_num = 0;

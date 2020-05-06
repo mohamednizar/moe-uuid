@@ -40,7 +40,7 @@ class ExampleTest extends TestCase
     }
 
     public function testValid(){
-        $valid = MoeUuid::isValidMoeUuid('MR5R-HR2B-2RPV',5);
+        $valid = MoeUuid::isValidMoeUuid('3KM-7DT-MB1',4);
         $this->assertEquals(true,$valid);
     }
 }

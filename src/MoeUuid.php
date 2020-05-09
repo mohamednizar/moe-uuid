@@ -47,7 +47,6 @@ class MoeUuid
         }
 
         $checkDigit = self::ValidateCheckCharacter($token);
-        echo 'checkDigit: ' .$checkDigit;
         $token .= $checkDigit;
         $token  = self::format($token,$split);
         return $token;

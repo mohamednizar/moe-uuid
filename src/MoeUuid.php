@@ -105,7 +105,7 @@ class MoeUuid
         return substr($newToken,1,strlen($newToken));
      }
 
-     public static function isValidMoeUuid($moeuuid,$type = 4){
+     public static function isValidMoeUuid($moeuuid,$type = 3){
         $split = self::getStingLength($type);
         return preg_match("/^[2346789BCDFGHJKMPQRTVWXY]{".$split."}-[2346789BCDFGHJKMPQRTVWXY]{".$split."}-[0-9BCDFGHJKMPQRTVWXY]{".$split."}/", $moeuuid);
      }

@@ -4,6 +4,13 @@ namespace Mohamednizar\MoeUuid;
 
 class MoeUuid
 {
+    static $charSet;
+
+    public function __construct()
+    {
+        self::$charSet = '2346789BCDFGHJKMPQRTVWXY';
+    }
+
     /**
      * This will randomize the alphanumeric
      * to 2.821109907×10¹² times
@@ -106,22 +113,28 @@ class MoeUuid
      }
 
      public static function isValidMoeUuid($moeuuid,$type = 3){
-        $split = self::getStingLength($type);
-        return preg_match("/^[2346789BCDFGHJKMPQRTVWXY]{".$split."}-[2346789BCDFGHJKMPQRTVWXY]{".$split."}-[0-9BCDFGHJKMPQRTVWXY]{".$split."}/", $moeuuid);
+        $token = str_replace("-","",$moeuuid);
+        $valid = preg_match("/^[".self::$charSet."]/",$token);
+        $index = strlen($token) -1;
+        $checkDigit = substr($token,$index);
+        $token = substr($token,self::setDigits($type)-1);
+        $checkValid = self::ValidateCheckCharacter($token);
+
+        return $valid && $checkDigit == $checkValid;
      }
 
      public static function CodePointFromCharacter($character){
-        $characters = array_flip(str_split("2346789BCDFGHJKMPQRTVWXY"));
+        $characters = array_flip(str_split(""));
         return $characters[$character];
      }
 
      public static function CharacterFromCodePoint($codePoint){
-        $characters = str_split("2346789BCDFGHJKMPQRTVWXY");
+        $characters = str_split(self::$charSet);
         return $characters[$codePoint];
      }
 
      public static function NumberOfValidCharacters(){
-        return strlen('2346789BCDFGHJKMPQRTVWXY');
+        return strlen(self::$charSet);
      }
 
     /**

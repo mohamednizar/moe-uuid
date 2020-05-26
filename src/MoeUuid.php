@@ -103,6 +103,13 @@ class MoeUuid
          }
      }
 
+     /**
+      * Undocumented function
+      *
+      * @param [type] $token
+      * @param [type] $split
+      * @return void
+      */
      public  static function format($token,$split){
         $partitions =  str_split($token,$split);
         $newToken = '';
@@ -112,11 +119,22 @@ class MoeUuid
         return substr($newToken,1,strlen($newToken));
      }
 
+     /**
+      * Check the valid ID
+      *
+      * @param [type] $moeuuid
+      * @param integer $type
+      * @return boolean
+      */
      public static function isValidMoeUuid($moeuuid,$type = 3){
         $token = str_replace("-","",$moeuuid);
         $valid = preg_match("/^[".self::$charSet."]/",$token);
         $index = strlen($token) -1;
+        
+        //get the current check digit
         $checkDigit = substr($token,$index);
+
+        // get the valid check digit
         $token = substr($token,self::setDigits($type)-1);
         $checkValid = self::ValidateCheckCharacter($token);
 
@@ -124,7 +142,7 @@ class MoeUuid
      }
 
      public static function CodePointFromCharacter($character){
-        $characters = array_flip(str_split(""));
+        $characters = array_flip(str_split($character));
         return $characters[$character];
      }
 

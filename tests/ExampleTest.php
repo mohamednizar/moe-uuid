@@ -41,6 +41,6 @@ class ExampleTest extends TestCase
 
     public function testValid(){
         $valid = MoeUuid::isValidMoeUuid('3KM-7DT-MB1',4);
-        $this->assertEquals(true,$valid);
+        $this->assertEquals(false,$valid);
     }
 }
